@@ -395,4 +395,7 @@ FodyWeavers.xsd
 *.msp
 
 # JetBrains Rider
-*.sln.imlMarketStockAnalyzer.API/client_secret.json
+*.sln.iml
+
+# Credentials
+MarketStockAnalyzer.API/client_secret.json
