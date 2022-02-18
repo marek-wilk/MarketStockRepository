@@ -47,7 +47,7 @@ namespace MarketStockAnalyzer.API.Controllers
             var filteredEntries = _sheetDataService.FilterEntriesByDates(entries, startDate, endDate);
             if (filteredEntries.Count > 0)
                 await _tickRepository.Add(entries.Except(ticks).ToList());
-            return entries;
+            return filteredEntries;
         }
     }
 }

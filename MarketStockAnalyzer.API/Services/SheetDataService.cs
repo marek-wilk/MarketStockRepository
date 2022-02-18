@@ -47,10 +47,10 @@ namespace MarketStockAnalyzer.API.Services
                 foreach (var row in values)
                 {
                     if (row.Count == 0) break;
-                    if (row[0].ToString() == "Date") continue;
+                    if (!DateTime.TryParse(row[0].ToString(), out DateTime result)) continue;
                     entries.Add(new Tick
                     {
-                        Date = DateTime.Parse(row[0].ToString()),
+                        Date = result,
                         Price = double.Parse(row[1].ToString())
                     });
                 }
