@@ -55,10 +55,6 @@ namespace MarketStockAnalyzer.API.Services
                     });
                 }
             }
-            else
-            {
-                Console.WriteLine("No data found.");
-            }
 
             return entries;
         }
