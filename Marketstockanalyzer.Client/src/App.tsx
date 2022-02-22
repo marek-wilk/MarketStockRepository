@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import Chart from "./Chart";
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
+import { Link, Route } from "react-router-dom";
 
 function App() {
+  const [startDate, setStartDate] = useState(new Date("2019.12.01"));
+  const [endDate, setEndDate] = useState(new Date("2020.12.01"));
+
+  const selectStartDateHandler = (date: Date) => {
+    setStartDate(date);
+  };
+
+  const selectEndDateHandler = (date: Date) => {
+    setEndDate(date);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <DatePicker selected={startDate} onChange={selectStartDateHandler} />
+      <DatePicker selected={endDate} onChange={selectEndDateHandler} />
+      <Link to="/chart">Go!</Link>
+      <Route path="/chart">
+        <Chart startDate={startDate} endDate={endDate} />
+      </Route>
     </div>
   );
 }

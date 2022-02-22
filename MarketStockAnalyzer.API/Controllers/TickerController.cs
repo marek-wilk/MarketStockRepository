@@ -20,7 +20,7 @@ namespace MarketStockAnalyzer.API.Controllers
         }
 
         [HttpPost]
-        public async Task<Ticker> CreateTicker([FromForm] DateTime start, [FromForm] DateTime end)
+        public async Task<List<Tick>> CreateTicker([FromForm] DateTime start, [FromForm] DateTime end)
         {
             var ticks = await _tickRepository.Get(start, end);
             _sheetDataService.CreateCredentials();
@@ -38,7 +38,7 @@ namespace MarketStockAnalyzer.API.Controllers
                 else if (!DateHelper.CompareDates(ticks.Last().Date, end) && !DateHelper.CompareDates(ticks.First().Date, start))
                     errorMessage = "Couldn't find all records from this range";
             }
-            return _tickerFactory.Create(ticks, errorMessage);
+            return ticks;
         }
 
         private async Task<List<Tick>> CallForMissingEntries(List<Tick> ticks, DateTime startDate, DateTime endDate)
