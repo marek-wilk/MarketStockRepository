@@ -18,12 +18,9 @@ function App() {
   };
   return (
     <div className="App">
-      <DatePicker selected={startDate} onChange={selectStartDateHandler} />
-      <DatePicker selected={endDate} onChange={selectEndDateHandler} />
-      <Link to="/chart">Go!</Link>
-      <Route path="/chart">
+        <DatePicker selected={startDate} onChange={selectStartDateHandler} />
+        <DatePicker selected={endDate} onChange={selectEndDateHandler} />
         <Chart startDate={startDate} endDate={endDate} />
-      </Route>
     </div>
   );
 }

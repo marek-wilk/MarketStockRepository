@@ -1,4 +1,5 @@
 ﻿using MarketStockAnalyzer.API.Data;
+using MarketStockAnalyzer.API.Data.DTO;
 using MarketStockAnalyzer.API.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,22 +21,22 @@ namespace MarketStockAnalyzer.API.Controllers
         }
 
         [HttpPost]
-        public async Task<List<Tick>> CreateTicker([FromForm] DateTime start, [FromForm] DateTime end)
+        public async Task<List<Tick>> CreateTicker(PickedDatesDTO dto)
         {
-            var ticks = await _tickRepository.Get(start, end);
+            var ticks = await _tickRepository.Get(dto.startDate, dto.endDate);
             _sheetDataService.CreateCredentials();
             string errorMessage = "";
             try
             {
-                if (!DateHelper.CompareDates(ticks.Last().Date, end) && !DateHelper.CompareDates(ticks.First().Date, start))
-                    ticks = await CallForMissingEntries(ticks, start, end);
+                if (!DateHelper.CompareDates(ticks.Last().Date, dto.endDate) && !DateHelper.CompareDates(ticks.First().Date, dto.startDate))
+                    ticks = await CallForMissingEntries(ticks, dto.startDate, dto.endDate);
             }
             catch (Exception e)
             {
-                ticks = await CallForMissingEntries(ticks, start, end);
+                ticks = await CallForMissingEntries(ticks, dto.startDate, dto.endDate);
                 if (ticks.Count == 0)
                     errorMessage = "No records found";
-                else if (!DateHelper.CompareDates(ticks.Last().Date, end) && !DateHelper.CompareDates(ticks.First().Date, start))
+                else if (!DateHelper.CompareDates(ticks.Last().Date, dto.endDate) && !DateHelper.CompareDates(ticks.First().Date, dto.startDate))
                     errorMessage = "Couldn't find all records from this range";
             }
             return ticks;
