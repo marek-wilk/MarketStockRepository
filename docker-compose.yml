@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  marketstockanalyzer.api:
+    image: ${DOCKER_REGISTRY-}marketstockanalyzerapi
+    build:
+      context: .
+      dockerfile: MarketStockAnalyzer.API/Dockerfile
+  
+  marketstockanalyzer.client:
+    image: ${DOCKER_REGISTRY-}marketstockanalyzerclient
+    build:
+      context: .
+      dockerfile: Marketstockanalyzer.Client/Dockerfile
+  
