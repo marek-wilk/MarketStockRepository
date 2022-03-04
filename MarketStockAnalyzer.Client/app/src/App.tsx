@@ -3,7 +3,6 @@ import "./App.css";
 import Chart from "./Chart";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import { Link, Route } from "react-router-dom";
 
 function App() {
   const [startDate, setStartDate] = useState(new Date("2019.12.01"));

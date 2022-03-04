@@ -10,6 +10,6 @@ services:
   marketstockanalyzer.client:
     image: ${DOCKER_REGISTRY-}marketstockanalyzerclient
     build:
-      context: .
-      dockerfile: Marketstockanalyzer.Client/Dockerfile
+      context: ./MarketStockAnalyzer.Client/app
+      dockerfile: .
   
