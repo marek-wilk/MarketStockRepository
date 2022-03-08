@@ -10,6 +10,8 @@ services:
   marketstockanalyzer.client:
     image: ${DOCKER_REGISTRY-}marketstockanalyzerclient
     build:
-      context: ./MarketStockAnalyzer.Client/app
+      context: MarketStockAnalyzer.Client/app
       dockerfile: .
   
+  marketstockanalyzer.db:
+    image: mongo

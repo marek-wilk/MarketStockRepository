@@ -6,8 +6,25 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
     ports:
-      - "80"
-      - "443"
+      - "7203:80"
+      - "44367:443"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  marketstockanalyzer.client:
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src:/app/src:ro
+    environment:
+      - REACT_APP_NAME=marketstockanalyzerclient
+      - CHOKIDAR_USEPOLLING=true
+
+  marketstockanalyzer.db:
+    container_name: marketstockanalyzerdb
+    restart: always
+    ports:
+     - "27017:27017"
+    volumes:
+     - ${WEBAPP_STORAGE_HOME}/site:/data/db
