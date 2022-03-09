@@ -5,6 +5,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - "DatabaseSettings:ConnectionString=mongodb://marketstockanalyzerdb:27017"
+    depends_on:
+      - marketstockanalyzer.db
     ports:
       - "7203:80"
       - "44367:443"
@@ -15,8 +18,9 @@ services:
   marketstockanalyzer.client:
     ports:
       - "3000:3000"
-    volumes:
-      - ./src:/app/src:ro
+    depends_on:
+      - marketstockanalyzer.api
+      - marketstockanalyzer.db
     environment:
       - REACT_APP_NAME=marketstockanalyzerclient
       - CHOKIDAR_USEPOLLING=true
