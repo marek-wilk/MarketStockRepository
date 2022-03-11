@@ -4,13 +4,11 @@ services:
   marketstockanalyzer.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
       - "DatabaseSettings:ConnectionString=mongodb://marketstockanalyzerdb:27017"
     depends_on:
       - marketstockanalyzer.db
     ports:
-      - "7203:80"
-      - "44367:443"
+      - "8000:80"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
