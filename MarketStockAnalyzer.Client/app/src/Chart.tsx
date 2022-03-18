@@ -22,7 +22,7 @@ const Chart = ({startDate, endDate} : IPickedDates) => {
   }, [startDate, endDate]);
 
   const fetchTicks = async () => {
-    await fetch("https://localhost:44367/Ticker", {
+    await fetch("/ticker", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

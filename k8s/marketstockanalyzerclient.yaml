@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: marketstockanalyzerclient
-        image: marwil665/marketstockanalyzerclient:16032022
+        image: marwil665/marketstockanalyzerclient:new18
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -41,7 +41,7 @@ kind: Service
 metadata:
   name: marketstockanalyzerclient-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: marketstockanalyzerclient
   ports:
@@ -49,4 +49,3 @@ spec:
     name: client-port
     port: 3000
     targetPort: 80
-    nodePort: 30000
